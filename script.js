@@ -104,3 +104,61 @@ function renderJobs() {
   } else {
     emptyState.classList.add("hidden");
   }
+   filteredJobs.forEach(job => {
+    const card = document.createElement("div");
+    card.className = "bg-white p-6 rounded-2xl shadow";
+
+    card.innerHTML = `
+      <!-- STATUS -->
+      <span class="badge mb-2 ${
+        job.status === "interview"
+          ? "badge-success"
+          : job.status === "rejected"
+          ? "badge-error"
+          : "badge-outline"
+      }">
+        ${job.status === "all" ? "NOT APPLIED" : job.status.toUpperCase()}
+      </span>
+
+      <!-- POSITION -->
+      <h3 class="text-lg font-semibold mt-2">${job.position}</h3>
+
+      <!-- COMPANY -->
+      <p class="font-medium">${job.company}</p>
+
+      <!-- LOCATION -->
+      <p class="text-sm text-gray-500">${job.location}</p>
+
+      <!-- TYPE + SALARY -->
+      <div class="flex items-center gap-3 text-sm mt-2">
+        <span class="badge badge-outline">${job.type}</span>
+        <span class="font-bold">${job.salary}</span>
+      </div>
+
+      <!-- DESCRIPTION -->
+      <p class="text-sm text-gray-600 mt-3">${job.description}</p>
+
+      <!-- BUTTONS -->
+      <div class="flex gap-2 mt-4">
+        <button class="btn btn-success btn-sm"
+          onclick="setStatus(${job.id}, 'interview')">
+          Interview
+        </button>
+
+        <button class="btn btn-error btn-sm"
+          onclick="setStatus(${job.id}, 'rejected')">
+          Rejected
+        </button>
+
+        <button class="btn btn-outline btn-sm"
+          onclick="deleteJob(${job.id})">
+          Delete
+        </button>
+      </div>
+    `;
+
+    container.appendChild(card);
+  });
+
+  updateDashboard();
+}
