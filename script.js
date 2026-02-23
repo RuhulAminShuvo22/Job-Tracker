@@ -83,3 +83,24 @@ let jobs = [
     status: "all"
   }
 ];
+/* ===== RENDER JOBS ===== */
+function renderJobs() {
+  const container = document.getElementById("jobsContainer");
+  const emptyState = document.getElementById("emptyState");
+
+  container.innerHTML = "";
+
+  const filteredJobs =
+    currentTab === "all"
+      ? jobs
+      : jobs.filter(job => job.status === currentTab);
+
+  document.getElementById("tabCount").innerText =
+    `${filteredJobs.length} Jobs`;
+
+  if (filteredJobs.length === 0) {
+    emptyState.classList.remove("hidden");
+    return;
+  } else {
+    emptyState.classList.add("hidden");
+  }
