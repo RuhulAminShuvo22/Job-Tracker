@@ -162,3 +162,17 @@ function renderJobs() {
 
   updateDashboard();
 }
+
+/* ===== STATUS UPDATE ===== */
+function setStatus(id, status) {
+  jobs = jobs.map(job =>
+    job.id === id ? { ...job, status } : job
+  );
+  renderJobs();
+}
+
+/* ===== DELETE JOB ===== */
+function deleteJob(id) {
+  jobs = jobs.filter(job => job.id !== id);
+  renderJobs();
+}
