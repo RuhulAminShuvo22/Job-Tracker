@@ -185,3 +185,21 @@ function updateDashboard() {
   document.getElementById("rejectedCount").innerText =
     jobs.filter(j => j.status === "rejected").length;
 }
+
+/* ===== TAB CHANGE ===== */
+function changeTab(tab, el) {
+  currentTab = tab;
+
+  document.querySelectorAll("button").forEach(btn => {
+    btn.classList.remove("border-b-2", "border-blue-600", "text-blue-600");
+    btn.classList.add("text-gray-500");
+  });
+
+  el.classList.add("border-b-2", "border-blue-600", "text-blue-600");
+  el.classList.remove("text-gray-500");
+
+  renderJobs();
+}
+
+/* ===== INITIAL LOAD ===== */
+renderJobs();
